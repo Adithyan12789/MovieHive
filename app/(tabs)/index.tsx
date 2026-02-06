@@ -2,12 +2,13 @@ import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
 import { fetchMovies } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import { useRouter } from "expo-router";
+import { useState } from "react";
 import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "react-native";
 import { icons } from "../../constants/icons";
 
 export default function Index() {
-  const router = useRouter();
+  
+  const [searchQuery, setSearchQuery] = useState('');
 
   const {
     data: movies,
@@ -41,10 +42,7 @@ export default function Index() {
         ) : (
           <View className="flex-1 mt-5">
             {/* Search Bar */}
-            <SearchBar
-              onPress={() => router.push("/search")}
-              placeholder="Search for a movie..."
-            />
+            <SearchBar placeholder="Search movies..." value={searchQuery} onChangeText={(text: string) => setSearchQuery(text)}/>
 
             {/* Movies Section */}
             <Text className="mt-5 font-bold text-lg text-white mb-3">
