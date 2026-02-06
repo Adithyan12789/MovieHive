@@ -5,7 +5,6 @@ import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
 import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "react-native";
 import { icons } from "../../constants/icons";
-import { images } from "../../constants/images";
 
 export default function Index() {
   const router = useRouter();
@@ -22,8 +21,6 @@ export default function Index() {
 
   return (
     <View className="flex-1 bg-primary">
-      {/* Background Image */}
-      <Image source={images.bg} className="absolute w-full h-full" />
 
       <ScrollView
         className="flex-1 px-5"
@@ -31,11 +28,12 @@ export default function Index() {
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 20 }}
       >
         {/* App Logo */}
-        <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
+        <Image source={icons.logo_premium} className="w-40 h-32 mt-16 mb-2 mx-auto" resizeMode="contain" />
+        <Text className="text-secondary text-2xl font-bold text-center mb-5">MOVIE HIVE</Text>
 
         {/* Loader / Error / Data */}
         {moviesLoading ? (
-          <ActivityIndicator size="large" color="#0000ff" className="mt-10 self-center" />
+          <ActivityIndicator size="large" color="#FFAD1F" className="mt-10 self-center" />
         ) : moviesError ? (
           <Text className="text-red-500 text-center mt-5">
             Error: {moviesError.message}
@@ -57,7 +55,7 @@ export default function Index() {
               data={movies}
               scrollEnabled={false}
               renderItem={({ item }) => (
-                <MovieCard {...item}/>
+                <MovieCard {...item} />
               )}
               keyExtractor={(item) => item.id.toString()}
               numColumns={3}
